@@ -1,6 +1,10 @@
+var prodDb = process.env.DATABASE_URL + '?ssl=true';
+var devDb = 'postgres://jamie@localhost:5432/recipe-app';
+var dbHost = process.env.NODE_ENV === 'production' ? prodDb : devDb;
+
 var options = {};
 var pgp = require('pg-promise')(options);
-var db = pgp('postgres://jamie@localhost:5432/recipe-app');
+var db = pgp(dbHost);
 
 function getRecipe(req, res, next) {
   var recipeId = parseInt(req.params.id);
