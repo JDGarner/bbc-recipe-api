@@ -4,10 +4,13 @@ var db = pgp('postgres://jamie@localhost:5432/recipe-app');
 
 function getRecipe(req, res, next) {
   var recipeId = parseInt(req.params.id);
-  db.one('SELECT * FROM recipes WHERE id = $1', recipeId)
+  db.oneOrNone('SELECT * FROM recipes WHERE id = $1', recipeId)
     .then(function (data) {
-      res.status(200)
-        .json(data);
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(404).send('Recipe with id ' + recipeId + ' does not exist.');
+      }
     })
     .catch(function (err) {
       return next(err);
@@ -15,10 +18,13 @@ function getRecipe(req, res, next) {
 }
 
 function getAllRecipes(req, res, next) {
-  db.any('SELECT * FROM recipes')
+  db.manyOrNone('SELECT * FROM recipes')
     .then(function (data) {
-      res.status(200)
-        .json(data);
+      if (data.length > 0) {
+        res.status(200).json(data);
+      } else {
+        res.status(404).send('No Recipes available.');
+      }
     })
     .catch(function (err) {
       return next(err);

@@ -4,5 +4,6 @@ To Do:
 - Create route for ALL recipes -> DONE
 - Create route for recipe by id -> DONE
 - Create db queries -> DONE
-- Handle incorrect id ->
-- Handle route not found ->
+- Handle id does not exist -> DONE
+- Handle no recipes available -> DONE
+- Handle route not found -> DONE
