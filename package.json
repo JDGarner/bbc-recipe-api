@@ -1,0 +1,15 @@
+{
+  "name": "bbc-recipe-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Jamie Garner",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
