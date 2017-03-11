@@ -1,0 +1,7 @@
+To Do:
+
+- Setup DB -> DONE
+- Create Routes -> DONE
+- Create db queries -> DONE
+- Handle incorrect id ->
+- Handle route not found ->
