@@ -8,17 +8,24 @@ var db = pgp(dbHost);
 
 function getRecipe(req, res, next) {
   var recipeId = parseInt(req.params.id);
-  db.oneOrNone('SELECT * FROM recipes WHERE id = $1', recipeId)
-    .then(function (data) {
-      if (data) {
-        res.status(200).json(data);
-      } else {
-        res.status(404).send('Recipe with id ' + recipeId + ' does not exist.');
-      }
+
+  db.task(buildTree)
+    .then(data=> {
+      res.status(200).json(data);
     })
-    .catch(function (err) {
-      return next(err);
+    .catch(error=> {
+      return next(error);
     });
+
+  function buildTree(t) {
+    return t.map('SELECT * FROM recipes WHERE id = $1', recipeId, recipe => {
+      return t.any('SELECT * FROM ingredients WHERE recipeId = $1', recipe.recipeid)
+        .then(ingredients => {
+          recipe.ingredients = ingredients;
+          return recipe;
+        });
+    }).then(t.batch);
+  }
 }
 
 function getAllRecipes(req, res, next) {

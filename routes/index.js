@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../queries/recipes');
+var queries = require('../queries');
 
-router.get('/recipes/:id', db.getRecipe);
-router.get('/recipes', db.getAllRecipes);
+router.get('/recipes/:id', queries.getRecipe);
+router.get('/recipes', queries.getAllRecipes);
 
 router.get('*', function(req, res, next){
   res.status(404).send('Route Not Found. Valid Routes - /recipes, /recipes:id');

@@ -1,5 +1,5 @@
 var express = require('express');
-var index = require('./routes/recipes');
+var routes = require('./routes');
 var app = express();
 
 app.use(function(req, res, next) {
@@ -8,7 +8,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', index);
+app.use('/', routes);
 
 var port = process.env.PORT || '3001';
 

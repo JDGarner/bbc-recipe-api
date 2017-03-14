@@ -1,6 +1,33 @@
+DROP TABLE recipes;
+CREATE TABLE recipes (
+  id serial primary key,
+  recipeId integer,
+  name text,
+  cookingTime integer,
+  mainIngredients text,
+  imageURL text
+);
+
 DELETE FROM recipes;
 INSERT INTO recipes
-(name, cookingTime, mainIngredients, imageURL)
+(recipeId, name, cookingTime, mainIngredients, imageURL)
 VALUES
-('Lemon Chicken', '30 Minutes', 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
-('Beef Stroganoff', '30 Minutes', 'Beef, Mustard, Mushrooms', 'beef-stroganoff.png');
+(1, 'Lemon Chicken', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(2, 'Lemon Chicken 2', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(3, 'Lemon Chicken 3', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(4, 'Lemon Chicken 4', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(5, 'Lemon Chicken 5', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(6, 'Lemon Chicken 6', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(7, 'Lemon Chicken 7', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(8, 'Lemon Chicken 8', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(9, 'Lemon Chicken 9', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(10, 'Lemon Chicken 10', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(11, 'Lemon Chicken 11', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(12, 'Lemon Chicken 12', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(13, 'Lemon Chicken 13', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(14, 'Lemon Chicken 14', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(15, 'Lemon Chicken 15', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(16, 'Lemon Chicken 16', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(17, 'Lemon Chicken 17', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(18, 'Lemon Chicken 18', 30, 'Chicken, Lemon, Thyme', 'lemon-chicken.png'),
+(19, 'Beef Stroganoff', 20, 'Beef, Mustard, Mushrooms', 'beef-stroganoff.png');
