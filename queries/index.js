@@ -28,10 +28,14 @@ function getRecipe(req, res, next) {
 
   db.oneOrNone(sql, recipeId)
     .then(data => {
+      if (data) {
         res.status(200).json(data.json);
+      } else {
+        res.status(404).send('Sorry, this recipe doesnt exist or may have been removed');
+      }
     })
     .catch(error => {
-        return next(error);
+      return next(error);
     });
 }
 
