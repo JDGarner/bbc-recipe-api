@@ -9,23 +9,30 @@ var db = pgp(dbHost);
 function getRecipe(req, res, next) {
   var recipeId = parseInt(req.params.id);
 
-  db.task(buildTree)
-    .then(data=> {
-      res.status(200).json(data);
-    })
-    .catch(error=> {
-      return next(error);
-    });
+  sql = `
+    SELECT
+      json_build_object(
+        'name', r.name,
+        'cookingtime', r.cookingTime,
+        'imageurl', r.imageURL,
+        'ingredients', (SELECT json_agg(
+          json_build_object(
+            'name', i.name,
+            'quantity', i.quantity,
+            'quantityType', i.quantityType
+          )
+        ) FROM ingredients i WHERE r.recipeId = i.recipeId)
+      ) json
+    FROM recipes r WHERE recipeId = $1
+  `;
 
-  function buildTree(t) {
-    return t.map('SELECT * FROM recipes WHERE id = $1', recipeId, recipe => {
-      return t.any('SELECT * FROM ingredients WHERE recipeId = $1', recipe.recipeid)
-        .then(ingredients => {
-          recipe.ingredients = ingredients;
-          return recipe;
-        });
-    }).then(t.batch);
-  }
+  db.oneOrNone(sql, recipeId)
+    .then(data => {
+        res.status(200).json(data.json);
+    })
+    .catch(error => {
+        return next(error);
+    });
 }
 
 function getAllRecipes(req, res, next) {
