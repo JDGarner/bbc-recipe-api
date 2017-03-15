@@ -12,6 +12,7 @@ function getRecipe(req, res, next) {
   sql = `
     SELECT
       json_build_object(
+        'id', r.id,
         'name', r.name,
         'cookingtime', r.cookingTime,
         'imageurl', r.imageURL,
